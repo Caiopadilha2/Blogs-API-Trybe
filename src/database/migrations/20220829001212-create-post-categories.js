@@ -4,8 +4,6 @@ module.exports = {
     await queryInterface.createTable('postCategories', {
       postId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        autoIncrement: true,
         references: {
           model: 'BlogPosts',
           key: 'id'
@@ -16,8 +14,6 @@ module.exports = {
       },
       categoryId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        autoIncrement: true,
         references: {
           model: 'Categories',
           key: 'id'
