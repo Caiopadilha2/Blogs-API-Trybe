@@ -10,6 +10,7 @@ app.use(express.json());
 
 app.get('/user', validateToken, loginController.getAll);
 app.get('/user/:id', validateToken, loginController.getById);
+app.get('/categories', validateToken, categoryController.getAll);
 
 app.post('/login', loginValidate, loginController.login);
 app.post('/categories', validateToken, categoryController.create);
