@@ -1,5 +1,5 @@
-const { User } = require('../models');
-const tokenHelper = require('../../helpers/tokenHelper');
+const { User } = require('../database/models');
+const TokenHelper = require('../helpers/tokenHelper');
 
 const login = async ({ email, password }) => {
   const userInfos = await User.findOne({ where: { email } });
@@ -9,7 +9,7 @@ const login = async ({ email, password }) => {
   const { password: userPassword, ...userWithoutPassword } = userInfos.dataValues;
   // 1h:03min aula Pedro, tirar o password do objeto para criar o token sem ela.
 
-  const token = tokenHelper.createToken(userWithoutPassword);
+  const token = TokenHelper.createToken(userWithoutPassword);
 
   return token;
 };
