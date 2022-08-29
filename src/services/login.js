@@ -21,7 +21,18 @@ const getAll = async () => {
   return result;
 };
 
+const getById = async ({ id }) => {
+  const user = await User.findOne({
+    where: {
+      id,
+    },
+    attributes: ['id', 'displayName', 'email', 'image'],
+  });
+  return user;
+};
+
 module.exports = {
   login,
   getAll,
+  getById,
 };
