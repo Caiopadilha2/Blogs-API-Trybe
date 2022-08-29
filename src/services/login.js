@@ -14,4 +14,14 @@ const login = async ({ email, password }) => {
   return token;
 };
 
-module.exports = { login };
+const getAll = async () => {
+  const result = await User.findAll({
+    attributes: ['id', 'displayName', 'email', 'image'],
+  });
+  return result;
+};
+
+module.exports = {
+  login,
+  getAll,
+};

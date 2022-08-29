@@ -1,8 +1,8 @@
-const loginServices = require('../services/login');
+const userServices = require('../services/login');
 
 const login = async (req, res) => {
   const { email, password } = req.body;
-  const response = await loginServices.login({ email, password });
+  const response = await userServices.login({ email, password });
 
   if (response.message) {
     return res.status(400).json({ message: 'Invalid fields' });
@@ -10,4 +10,19 @@ const login = async (req, res) => {
   return res.status(200).json({ token: response });
 };
 
-module.exports = { login };
+const getAll = async (req, res, next) => {
+  try {
+    const users = await userServices.getAll();
+    if (!users) {
+      return res.status(400).end();
+    }
+    res.status(200).json(users);
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = {
+  login,
+  getAll,
+};
