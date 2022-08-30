@@ -14,6 +14,7 @@ app.get('/user', validateToken, loginController.getAll);
 app.get('/user/:id', validateToken, loginController.getById);
 app.get('/categories', validateToken, categoryController.getAll);
 app.get('/post', validateToken, postController.getAll);
+app.get('/post/:id', validateToken, postController.getById);
 
 app.post('/user',
 validationsUser.display,
