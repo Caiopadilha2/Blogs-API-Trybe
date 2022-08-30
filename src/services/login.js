@@ -31,8 +31,22 @@ const getById = async ({ id }) => {
   return user;
 };
 
+const createUser = async ({ displayName, email, password, image }) => {
+  const user = await User.create({ displayName, email, password, image });
+  const { password: userPassword, ...userWithoutPassword } = user.dataValues;
+  const token = TokenHelper.createToken(userWithoutPassword);
+  return token;
+};
+
+const findUserByEmail = async ({ email }) => {
+  const user = await User.findOne({ where: { email } });
+  return user;
+};
+
 module.exports = {
   login,
   getAll,
   getById,
+  createUser,
+  findUserByEmail,
 };

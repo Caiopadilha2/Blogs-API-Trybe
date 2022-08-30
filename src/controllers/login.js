@@ -36,8 +36,23 @@ const getById = async (req, res, next) => {
   }
 };
 
+const createUser = async (req, res, next) => {
+  const { displayName, email, password, image } = req.body;
+  try {
+    const user = await userServices.findUserByEmail({ email });
+    if (user) {
+      return res.status(409).json({ message: 'User already registered' });
+    }
+    const created = await userServices.createUser({ displayName, email, password, image });
+    return res.status(201).json({ token: created });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   login,
   getAll,
   getById,
+  createUser,
 };
